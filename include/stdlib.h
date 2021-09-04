@@ -3,15 +3,15 @@
 
 #include "stddef.h"
 
-void panic(char*);
+void panic(char *);
 
 #ifndef assert
-#define assert(f) \
-    if (!(f))     \
-    exit(-1)
+#define assert(f)                                                              \
+	if (!(f))                                                              \
+	exit(-1)
 #endif
 
 void srand(int s);
 uint32 rand();
 
-#endif  //__STDLIB_H__
+#endif //__STDLIB_H__

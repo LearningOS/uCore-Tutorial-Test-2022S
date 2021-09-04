@@ -7,15 +7,16 @@
 作为判断。
 */
 
-int main() {
-    int pid = getpid();
-    int ppid = getppid();
-    if (fork() == 0) {
-        int cppid = getppid();
-        assert(cppid == pid);
-        printf("Test getppid OK!\n");
-        exit(0);
-    }
-    printf("Test getpid OK! pid = %d, ppid = %d\n", pid, ppid);
-    return 0;
+int main()
+{
+	int pid = getpid();
+	int ppid = getppid();
+	if (fork() == 0) {
+		int cppid = getppid();
+		assert(cppid == pid);
+		printf("Test getppid OK!\n");
+		exit(0);
+	}
+	printf("Test getpid OK! pid = %d, ppid = %d\n", pid, ppid);
+	return 0;
 }

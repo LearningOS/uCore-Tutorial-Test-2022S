@@ -2,8 +2,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int main() {
-    char* _argv[] = {"(*o*)", "(>.<)", "(O.O)", "(QwQ)", "orz", "没有了呀"};
-    exec("ch7b_args", _argv);
-    return 0;
+int main()
+{
+	char *_argv[] = {
+		"(*o*)", "(>.<)", "(O.O)", "(QwQ)", "orz", "没有了呀"
+	};
+	exec("ch7b_args", _argv);
+	return 0;
 }

@@ -5,7 +5,8 @@
 /// Hello world from user mode program!
 /// Test hello_world OK!
 
-int main() {
-    puts("Hello world from user mode program!\nTest hello_world OK!");
-    return 0;
+int main()
+{
+	puts("Hello world from user mode program!\nTest hello_world OK!");
+	return 0;
 }

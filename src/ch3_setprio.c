@@ -8,11 +8,11 @@
 
 int main()
 {
-    assert(set_priority(10) == 10);
-    assert(set_priority(INT_MAX) == INT_MAX);
-    assert(set_priority(0) == -1);
-    assert(set_priority(1) == -1);
-    assert(set_priority(-10) == -1);
-    puts("Test set_priority OK!");
-    return 0;
+	assert(set_priority(10) == 10);
+	assert(set_priority(INT_MAX) == INT_MAX);
+	assert(set_priority(0) == -1);
+	assert(set_priority(1) == -1);
+	assert(set_priority(-10) == -1);
+	puts("Test set_priority OK!");
+	return 0;
 }

@@ -10,15 +10,14 @@ const int HEIGHT = 5;
 
 int main()
 {
-    for (int i = 0; i < HEIGHT; ++i)
-    {
-        char buf[WIDTH + 1];
-        for (int j = 0; j < WIDTH; ++j)
-            buf[j] = 'A';
-        buf[WIDTH] = 0;
-        printf("%s [%d/%d]\n", buf, i + 1, HEIGHT);
-        sched_yield();
-    }
-    puts("Test write A OK!");
-    return 0;
+	for (int i = 0; i < HEIGHT; ++i) {
+		char buf[WIDTH + 1];
+		for (int j = 0; j < WIDTH; ++j)
+			buf[j] = 'A';
+		buf[WIDTH] = 0;
+		printf("%s [%d/%d]\n", buf, i + 1, HEIGHT);
+		sched_yield();
+	}
+	puts("Test write A OK!");
+	return 0;
 }

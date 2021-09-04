@@ -10,13 +10,14 @@
 /// 注意不要单纯以 passed! 作为判断，还要注意时间间隔是否真的在 100
 /// 附近，误差要不超过 20%。
 
-int main() {
-    int64 start = get_mtime();
-    printf("current time_msec = %d\n", start);
-    sleep(100);
-    int64 end = get_mtime();
-    printf("time_msec = %d after sleeping 100 ticks, delta = %dms!\n", end,
-           end - start);
-    puts("Test sleep1 passed!");
-    return 0;
+int main()
+{
+	int64 start = get_mtime();
+	printf("current time_msec = %d\n", start);
+	sleep(100);
+	int64 end = get_mtime();
+	printf("time_msec = %d after sleeping 100 ticks, delta = %dms!\n", end,
+	       end - start);
+	puts("Test sleep1 passed!");
+	return 0;
 }
