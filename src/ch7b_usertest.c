@@ -19,7 +19,11 @@ int main()
 	for (int i = 0; i < num_test; ++i) {
 		char *test = TESTS[i];
 		printf("Usertests: Running %s\n", test);
-		int pid = spawn(test);
+		int pid = fork();
+		if (pid == 0) {
+			exec(test, NULL);
+			// unreachable()
+		}
 		int xstate = 0;
 		int wait_pid = waitpid(pid, &xstate);
 		assert(pid == wait_pid);
