@@ -94,4 +94,3 @@ target: binary del
 
 clean:
 	@rm -rf asm build target
-	@rm *.img
