@@ -31,6 +31,36 @@ void clear()
 	top = 0;
 }
 
+char* argv[100];
+char data[100][100];
+char name[100];
+void get_argv() 
+{
+	for(int i=0;i<100;i++) 
+		argv[i] = NULL;
+	int argc = -1;
+	int st_pos[100];
+	for(int i = 0;i < top;i ++){
+		if(line[i] == ' ' || line[i] == '\0') {
+				st_pos[++argc] = i;
+			if(argc != 0) {
+				argv[argc - 1] = data[argc - 1];
+				int j;
+				for(j=st_pos[argc-1]+1;j!=st_pos[argc];j++){
+					argv[argc-1][j - st_pos[argc-1] - 1] = line[j];
+				}
+				argv[argc-1][j - st_pos[argc-1] - 1] = '\0';
+			} else {
+				int j;
+				for(j = 0;j < st_pos[argc];j ++){
+					name[j] = line[j];
+				}
+				name[j] = '\0';
+			}
+		}
+	}
+}
+
 int main()
 {
 	printf("C user shell\n");
@@ -46,8 +76,9 @@ int main()
 				push('\0');
 				int pid = fork();
 				if (pid == 0) {
+					get_argv();
 					// child process
-					if (exec(line, NULL) < 0) {
+					if (exec(name, argv) < 0) {
 						printf("no such program: %s\n",
 						       line);
 						exit(0);
@@ -80,6 +111,8 @@ int main()
 			putchar(c);
 			fflush(stdout);
 			push(c);
+			if(c == 'q')
+				panic("exit!");
 			break;
 		}
 	}
