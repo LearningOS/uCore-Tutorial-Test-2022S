@@ -78,7 +78,7 @@ endif
 
 binary:
 	@mkdir -p build
-	@cd build && CHAPTER=$(CHAPTER) cmake $(cmake_build_args) .. && make
+	@cd build && CHAPTER=$(CHAPTER) cmake $(cmake_build_args) .. && make -j`proc`
 	@mkdir -p asm
 	@$(CP) build/asm/* asm
 
@@ -94,4 +94,3 @@ target: binary del
 
 clean:
 	@rm -rf asm build target
-	@rm *.img

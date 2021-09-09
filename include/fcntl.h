@@ -7,4 +7,4 @@
 #define O_CREATE 0x200
 #define O_TRUNC 0x400
 
-#endif  // __FCNIL_H__
+#endif // __FCNIL_H__

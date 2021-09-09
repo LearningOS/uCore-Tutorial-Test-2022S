@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int main() {
-    puts("execute hello");
-    exec("ch2b_hello_world", NULL);
-    return 0;
+int main()
+{
+	puts("execute hello");
+	exec("ch2b_hello_world", NULL);
+	return 0;
 }

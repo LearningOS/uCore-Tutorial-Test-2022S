@@ -42,7 +42,7 @@ typedef intptr_t ssize_t;
 
 typedef int pid_t;
 
-#define NULL ((void*)0)
+#define NULL ((void *)0)
 
 #define va_start(ap, last) (__builtin_va_start(ap, last))
 #define va_arg(ap, type) (__builtin_va_arg(ap, type))
@@ -52,7 +52,7 @@ typedef __builtin_va_list va_list;
 
 #define O_RDONLY 0x000
 #define O_WRONLY 0x001
-#define O_RDWR 0x002  // 可读可写
+#define O_RDWR 0x002 // 可读可写
 #define O_CREATE 0x200
 
 #define DIR 0x040000
@@ -61,16 +61,16 @@ typedef __builtin_va_list va_list;
 #define AT_FDCWD -100
 
 typedef struct {
-    uint64 sec;   // 自 Unix 纪元起的秒数
-    uint64 usec;  // 微秒数
+	uint64 sec; // 自 Unix 纪元起的秒数
+	uint64 usec; // 微秒数
 } TimeVal;
 
 typedef struct {
-    uint64 dev;     // 文件所在磁盘驱动器号，不考虑
-    uint64 ino;     // inode 文件所在 inode 编号
-    uint32 mode;    // 文件类型
-    uint32 nlink;   // 硬链接数量，初始为1
-    uint64 pad[7];  // 无需考虑，为了兼容性设计
+	uint64 dev; // 文件所在磁盘驱动器号，不考虑
+	uint64 ino; // inode 文件所在 inode 编号
+	uint32 mode; // 文件类型
+	uint32 nlink; // 硬链接数量，初始为1
+	uint64 pad[7]; // 无需考虑，为了兼容性设计
 } Stat;
 
-#endif  // __STDDEF_H__
+#endif // __STDDEF_H__

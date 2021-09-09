@@ -22,19 +22,20 @@ const int MOD = 10007;
 /// 3^100000=2749
 /// Test power OK!
 
-int main() {
-    int pow[10] = {};
-    int index = 0;
-    int i, last;
-    pow[index] = 1;
-    for (i = 1; i <= STEP; ++i) {
-        last = pow[index];
-        index = (index + 1) % SIZE;
-        pow[index] = (last * P) % MOD;
-        if ((i % 10000) == 0) {
-            printf("%d^%d=%d\n", P, i, pow[index]);
-        }
-    }
-    puts("Test power OK!");
-    return 0;
+int main()
+{
+	int pow[10] = {};
+	int index = 0;
+	int i, last;
+	pow[index] = 1;
+	for (i = 1; i <= STEP; ++i) {
+		last = pow[index];
+		index = (index + 1) % SIZE;
+		pow[index] = (last * P) % MOD;
+		if ((i % 10000) == 0) {
+			printf("%d^%d=%d\n", P, i, pow[index]);
+		}
+	}
+	puts("Test power OK!");
+	return 0;
 }
