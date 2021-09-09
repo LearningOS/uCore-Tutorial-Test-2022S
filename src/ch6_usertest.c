@@ -11,7 +11,8 @@ char *TESTS[] = {
 	"ch4_mmap3\0",	      "ch4_unmap\0",	  "ch4_unmap2\0",
 	"ch5_getpid\0",	      "ch5_spawn0\0",	  "ch5_spawn1\0",
 	"ch5b_forktest0\0",   "ch5b_forktest1\0", "ch5b_forktest2\0",
-	"ch6b_pipetest\0",
+	"ch6b_pipetest\0",    "ch6_shmem0\0",	  "ch6_shmem1\0",
+	"ch6_shmem2\0",
 };
 
 int main()

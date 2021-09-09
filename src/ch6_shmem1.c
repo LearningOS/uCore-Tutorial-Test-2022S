@@ -6,8 +6,8 @@
 
 int main()
 {
-	uint64 start0 = 0x10000000;
-	uint64 start1 = 0x10000000 + 0x1000;
+	uint64 *start0 = (void *)0x10000000;
+	uint64 *start1 = (void *)(0x10000000 + 0x1000);
 	uint64 len = 0x1000;
 	uint64 prot = 3;
 	int xstate = 0;
@@ -16,20 +16,20 @@ int main()
 	int pid = fork();
 	if (pid == 0) {
 		mmap(start1, len, prot, MAP_SHARED, shmem0_id);
-		for (int try = 0; *(uint64 *)start1 != 0xabab; try++) {
+		for (int try = 0; *start1 != 0xabab; try++) {
 			sched_yield();
 			if (try >= 3) {
 				exit(-1);
 			}
 		}
-		*(uint64 *)start1 = 0xbaba;
+		*start1 = 0xbaba;
 		exit(0);
 	} else {
-		*(uint64 *)start0 = 0xabab;
+		*start0 = 0xabab;
 		munmap(start0, len);
 		assert(wait(&xstate) == pid);
 		assert(xstate == 0);
-		assert(*(uint64 *)start0 = 0xbaba);
+		assert(*start0 = 0xbaba);
 	}
 	puts("ch6_shmem1 OK!");
 	return 0;
