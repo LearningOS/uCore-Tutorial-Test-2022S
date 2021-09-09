@@ -52,6 +52,8 @@ else ifeq ($(CHAPTER), 2_bad)
 	CH_TESTS := __ch2_bad_
 else ifeq ($(CHAPTER), 3)
 	CH_TESTS := $(CH3_TESTS_BASE)
+else ifeq ($(CHAPTER), 3_2)
+	CH_TESTS := $(CH3_BASE_TESTS) ch2t_
 else ifeq ($(CHAPTER), 3t)
 	CH_TESTS := $(CH3_SCHED_TEST)
 else ifeq ($(CHAPTER), 4)
