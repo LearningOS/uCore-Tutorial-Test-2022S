@@ -12,7 +12,7 @@ int main()
 	uint64 start = 0x10000000;
 	uint64 len = 4096;
 	int prot = 3;
-	assert(0 == mmap((void *)start, len, prot));
+	assert(0 == mmap((void *)start, len, prot, MAP_ANONYMOUS, -1));
 	for (uint64 i = start; i < (start + len); ++i) {
 		uint8 *addr = (uint8 *)i;
 		*addr = (uint8)i;
