@@ -13,11 +13,11 @@ int main()
 	int shmem_id0 = mmap(start0, len, prot, MAP_SHARED, -1);
 	assert(shmem_id0 >= 0);
 	int shmem_id1 = mmap(start1, len, prot, MAP_SHARED, shmem_id0);
-	assert(shmem_id1 == shmem_id0);
+	assert_eq(shmem_id1, shmem_id0);
 	puts("shmem ok!");
 	*start0 = 0xabab;
 	__sync_synchronize();
-	assert(*start1 == 0xabab);
+	assert_eq(*start1, 0xabab);
 	puts("w/r ok!");
 	munmap(start0, len);
 	munmap(start1, len);

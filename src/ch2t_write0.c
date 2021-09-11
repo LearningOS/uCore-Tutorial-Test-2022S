@@ -27,10 +27,10 @@ uint64 stack_top()
 
 int main()
 {
-	assert(write(stdout, (const void *)0, 10) == -1);
+	assert_eq(write(stdout, (const void *)0, 10), -1);
 	uint64 top = stack_top(), bottom = top - STACK_SIZE;
-	assert(write(stdout, (const void *)(top - 5), 10) == -1);
-	assert(write(stdout, (const void *)(bottom - 5), 10) == -1);
+	assert_eq(write(stdout, (const void *)(top - 5), 10), -1);
+	assert_eq(write(stdout, (const void *)(bottom - 5), 10), -1);
 	puts("Test write0 OK!");
 	return 0;
 }

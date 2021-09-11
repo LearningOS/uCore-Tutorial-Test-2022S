@@ -14,7 +14,7 @@ int run_tests(char *tests[], int n)
 		}
 		int xstate = 0;
 		int wait_pid = waitpid(pid, &xstate);
-		assert(pid == wait_pid);
+		assert_eq(pid, wait_pid);
 		success += (xstate == 0);
 		printf("Usertests: Test %s in Process %d exited with code %d\n",
 		       test, pid, xstate);

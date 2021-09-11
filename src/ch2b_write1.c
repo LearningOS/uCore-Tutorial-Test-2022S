@@ -14,13 +14,13 @@ char *DATA_STRING = "string from data section\n";
 int main()
 {
 	int str_len = strlen(DATA_STRING);
-	assert(write(1234, DATA_STRING, str_len) == -1);
-	assert(write(stdout, DATA_STRING, str_len) == str_len);
-	assert(write(stdout, DATA_STRING, 5) == 5);
+	assert_eq(write(1234, DATA_STRING, str_len), -1);
+	assert_eq(write(stdout, DATA_STRING, str_len), str_len);
+	assert_eq(write(stdout, DATA_STRING, 5), 5);
 	char *stack_string = "string from stack section\n";
 	str_len = strlen(stack_string);
-	assert(write(stdout, stack_string, str_len) == str_len);
-	assert(write(stdout, stack_string, 5) == 5);
+	assert_eq(write(stdout, stack_string, str_len), str_len);
+	assert_eq(write(stdout, stack_string, 5), 5);
 	puts("\nTest write1 OK!");
 	return 0;
 }

@@ -18,11 +18,11 @@ int main()
 	link(fname, lname0);
 	Stat stat;
 	fstat(fd, &stat);
-	assert(stat.nlink == 2);
+	assert_eq(stat.nlink, 2);
 	link(fname, lname1);
 	link(fname, lname2);
 	fstat(fd, &stat);
-	assert(stat.nlink == 4);
+	assert_eq(stat.nlink, 4);
 	write(fd, test_str, strlen(test_str));
 	close(fd);
 
@@ -32,15 +32,15 @@ int main()
 	char buf[100];
 	memset(buf, 0, sizeof(buf));
 	int read_len = read(fd, &buf, sizeof(buf));
-	assert(strncmp(test_str, buf, read_len) == 0);
+	assert_eq(strncmp(test_str, buf, read_len), 0);
 	fstat(fd, &stat2);
-	assert(stat2.dev == stat.dev);
-	assert(stat2.ino == stat.ino);
-	assert(stat2.nlink == 3);
+	assert_eq(stat2.dev, stat.dev);
+	assert_eq(stat2.ino, stat.ino);
+	assert_eq(stat2.nlink, 3);
 	unlink(lname1);
 	unlink(lname2);
 	fstat(fd, &stat2);
-	assert(stat2.nlink == 1);
+	assert_eq(stat2.nlink, 1);
 	close(fd);
 	unlink(lname0);
 	// It's Ok if you don't delete the inode and data blocks.

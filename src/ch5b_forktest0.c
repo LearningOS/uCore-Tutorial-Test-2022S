@@ -16,8 +16,8 @@ int main()
 		// parent process
 		int xstate = 0;
 		printf("ready waiting on parent process!\n");
-		assert(pid == wait(&xstate));
-		assert(xstate == 100);
+		assert_eq(pid, wait(&xstate));
+		assert_eq(xstate, 100);
 		printf("child process pid = %d, exit code = %d\n", pid, xstate);
 	}
 	printf("forktest0 pass.\n");

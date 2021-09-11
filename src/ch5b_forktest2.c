@@ -16,7 +16,7 @@ int main()
 	int xstate = 0;
 	for (int i = 0; i < NUM; ++i) {
 		assert(wait(&xstate) > 0);
-		assert(xstate == 0);
+		assert_eq(xstate, 0);
 	}
 	assert(wait(&xstate) < 0);
 	printf("forktest2 test passed!\n");

@@ -15,7 +15,7 @@ int check(void *start, int shmem_id)
 	int ppid = getppid();
 	uint64 *s = start;
 	int r = mmap(start, len, prot, MAP_SHARED, shmem_id);
-	assert(r == shmem_id);
+	assert_eq(r, shmem_id);
 
 	for (int try = 0; *s != ppid; try++) {
 		sched_yield();

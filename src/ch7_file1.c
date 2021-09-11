@@ -13,9 +13,9 @@ int main()
 	assert(fd > 0);
 	Stat stat;
 	int ret = fstat(fd, &stat);
-	assert(ret == 0);
-	assert(stat.mode == FILE);
-	assert(stat.nlink == 1);
+	assert_eq(ret, 0);
+	assert_eq(stat.mode, FILE);
+	assert_eq(stat.nlink, 1);
 	close(fd);
 	// unlink(fname);
 	// It's recommended to rebuild the disk image. This program will not clean

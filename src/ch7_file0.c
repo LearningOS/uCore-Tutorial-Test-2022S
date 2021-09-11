@@ -23,7 +23,7 @@ int main()
 	int read_len = read(fd, &buffer, sizeof(buffer));
 	close(fd);
 
-	assert(strncmp(buffer, test_str, read_len) == 0);
+	assert_eq(strncmp(buffer, test_str, read_len), 0);
 	puts("Test file0 OK!");
 	return 0;
 }

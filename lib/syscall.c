@@ -75,7 +75,7 @@ int64 get_mtime()
 		return (time.sec * 1000 + time.usec / 1000);
 	}
 	// get_time should never failed.
-	exit(-1);
+	return -1;
 }
 
 int sys_get_time(TimeVal *ts, int tz)
