@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 
 #define MAX_ARG_NUM (32)
 #define MAX_STR_LEN (200)
@@ -54,6 +55,14 @@ void get_argv()
 	}
 }
 
+void parse_argv()
+{
+	if (strncmp(line, "quit", sizeof("quit")) == 0) {
+		exit(0);
+	}
+	get_argv();
+}
+
 int main()
 {
 	printf("C user shell\n");
@@ -67,9 +76,9 @@ int main()
 			printf("\n");
 			if (!is_empty()) {
 				push('\0');
+				parse_argv();
 				int pid = fork();
 				if (pid == 0) {
-					get_argv();
 					// child process
 					if (exec(argv[0], argv) < 0) {
 						printf("no such program: %s\n",
@@ -104,8 +113,6 @@ int main()
 			putchar(c);
 			fflush(stdout);
 			push(c);
-			if (c == 'q')
-				panic("exit!");
 			break;
 		}
 	}
