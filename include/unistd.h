@@ -20,7 +20,7 @@ int sys_get_time(TimeVal *ts,
 // 返回值：正确返回 0，错误返回 -1。
 int sleep(unsigned long long);
 int set_priority(int prio);
-int mmap(void *start, unsigned long long len, int prot);
+int mmap(void *start, unsigned long long len, int prot, int flag, int shmem_id);
 int munmap(void *start, unsigned long long len);
 int wait(int *);
 int spawn(char *file);

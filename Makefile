@@ -23,14 +23,14 @@ CH2_BASE_TESTS := ch2b_
 CH3_BASE_TESTS := ch3b_ $(CH2_BASE_TESTS)
 CH4_BASE_TESTS := $(CH2_BASE_TESTS) ch3b_yield # ch4b_
 CH5_BASE_TESTS := ch5b_ $(CH3_BASE_TESTS) usershell
-CH6_BASE_TESTS := ch6b_ $(CH5_BASE_TESTS)
-CH7_BASE_TESTS := ch7b_ $(CH6_BASE_TESTS)
+CH6_BASE_TESTS := ch6b_ $(CH5_BASE_TESTS) 
+CH7_BASE_TESTS := ch7b_ $(CH6_BASE_TESTS) 
 
 CH2_TESTS := ch2b_ ch2t_
 CH3_TESTS_BASE := ch3b_ $(CH2_TESTS) ch3_
 CH3_SCHED_TEST := ch3t_
 CH4_TESTS := $(CH4_BASE_TESTS) ch4_
-CH5_TESTS := ch5b_ $(CH4_TESTS) ch5_
+CH5_TESTS := ch5b_ $(CH4_TESTS) usershell # ch5_ 
 CH6_TESTS := ch6b_ $(CH5_TESTS) ch6_
 CH7_TESTS := ch7b_ $(CH6_TESTS) ch7_
 CH8_TESTS := $(CH7_TESTS) ch8_
@@ -92,7 +92,7 @@ del:
 target: binary del
 	@echo tests=$(CH_TESTS)
 	@$(foreach t, $(CH_TESTS), cp $(bin_dir)/$(t)* $(out_dir)/bin/;)
-	@$(foreach t, $(CH_TESTS), cp $(src_dir)/$(t)* $(out_dir)/elf/;)
+	# @$(foreach t, $(CH_TESTS), cp $(elf_dir)/$(t)* $(out_dir)/elf/;)
 
 clean:
 	@rm -rf asm build target

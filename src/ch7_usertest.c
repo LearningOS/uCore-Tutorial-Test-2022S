@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include "usertest.h"
 
 /// 辅助测例，运行所有其他测例。
 

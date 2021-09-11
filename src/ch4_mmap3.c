@@ -13,10 +13,13 @@ int main()
 	uint64 len = 4096;
 	int prot = 3;
 	assert(0 == mmap((void *)start, len, prot, MAP_ANONYMOUS, -1));
-	assert(mmap((void *)(start - len), len + 1, prot) == -1);
-	assert(mmap((void *)(start + len + 1), len, prot) == -1);
-	assert(mmap((void *)(start + len), len, 0) == -1);
-	assert(mmap((void *)(start + len), len, prot | 8) == -1);
+	assert(mmap((void *)(start - len), len + 1, prot, MAP_ANONYMOUS, -1) ==
+	       -1);
+	assert(mmap((void *)(start + len + 1), len, prot, MAP_ANONYMOUS, -1) ==
+	       -1);
+	assert(mmap((void *)(start + len), len, 0, MAP_ANONYMOUS, -1) == -1);
+	assert(mmap((void *)(start + len), len, prot | 8, MAP_ANONYMOUS, -1) ==
+	       -1);
 	puts("Test 04_4 test OK!");
 	return 0;
 }

@@ -15,7 +15,9 @@ int main()
 	assert(shmem_id0 >= 0);
 	int pid = fork();
 	if (pid == 0) {
-		mmap(start1, len, prot, MAP_SHARED, shmem0_id);
+		sched_yield();
+		int ret = mmap(start1, len, prot, MAP_SHARED, shmem_id0);
+		assert(ret == shmem_id0);
 		for (int try = 0; *start1 != 0xabab; try++) {
 			sched_yield();
 			if (try >= 3) {
@@ -26,9 +28,9 @@ int main()
 		exit(0);
 	} else {
 		*start0 = 0xabab;
-		munmap(start0, len);
 		assert(wait(&xstate) == pid);
 		assert(xstate == 0);
+		__sync_synchronize();
 		assert(*start0 = 0xbaba);
 	}
 	puts("ch6_shmem1 OK!");
