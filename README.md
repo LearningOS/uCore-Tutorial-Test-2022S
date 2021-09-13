@@ -9,7 +9,7 @@ make CHAPTER=5 BASE=1
 ```
 
 CHAPTER:
-* Optional values: 1,2,3,3t,4,5,6,7,8.
+* Optional values: 1,2,3,3_2,3t,4,4_3,5,6,7.
 * Note that uCore will set the default value of `CHAPTER` according the name of branch. So usually you need not to care about this parameter.
 
 BASE:

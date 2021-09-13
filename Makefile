@@ -58,6 +58,8 @@ else ifeq ($(CHAPTER), 3t)
 	CH_TESTS := $(CH3_SCHED_TEST)
 else ifeq ($(CHAPTER), 4)
 	CH_TESTS := $(CH4_TESTS)
+else ifeq ($(CHAPTER), 4_3)
+	CH_TESTS := $(CH4_TESTS) ch3b_sleep
 else ifeq ($(CHAPTER), 4_only)
 	CH_TESTS := ch4_ ch4b_
 else ifeq ($(CHAPTER), 5)
