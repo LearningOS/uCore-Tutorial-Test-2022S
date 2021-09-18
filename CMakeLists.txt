@@ -79,7 +79,7 @@ foreach(PATH ${SRCS})
             TARGET ${NAME}
             POST_BUILD
             COMMAND mkdir -p ${BIN_DIR}
-            COMMAND ${CMAKE_OBJCOPY} ARGS -O binary $<TARGET_FILE:${NAME}> ${BIN_DIR}/${NAME} --set-section-flags .bss=alloc,load,contents
+            COMMAND ${CMAKE_OBJCOPY} ARGS -O binary $<TARGET_FILE:${NAME}> ${BIN_DIR}/${NAME}
     )
 endforeach()
 

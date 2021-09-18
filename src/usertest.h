@@ -1,7 +1,7 @@
 #ifndef USER_TEST
 #define USER_TEST
 
-int run_tests(char *tests[], int n)
+int run_tests(const char *tests[], int n)
 {
 	int success = 0;
 	for (int i = 0; i < n; ++i) {

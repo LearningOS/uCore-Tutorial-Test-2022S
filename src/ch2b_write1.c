@@ -3,7 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 
-char *DATA_STRING = "string from data section\n";
+const char DATA_STRING[] = "string from data section\n";
 
 /// 正确输出：
 /// string from data section
