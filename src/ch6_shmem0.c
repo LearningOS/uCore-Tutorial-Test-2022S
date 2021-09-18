@@ -15,9 +15,9 @@ int main()
 	int shmem_id1 = mmap(start1, len, prot, MAP_SHARED, shmem_id0);
 	assert_eq(shmem_id1, shmem_id0);
 	puts("shmem ok!");
-	*start0 = 0xabab;
+	*start0 = 0xababULL;
 	__sync_synchronize();
-	assert_eq(*start1, 0xabab);
+	assert_eq(*start1, 0xababULL);
 	puts("w/r ok!");
 	munmap(start0, len);
 	munmap(start1, len);

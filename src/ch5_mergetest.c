@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "usertest.h"
 
 /// 辅助测例，运行所有其他测例。
 
@@ -13,21 +14,11 @@ char *TESTS[] = {
 	"ch4_mmap3\0",	      "ch4_unmap0\0",	  "ch4_unmap1\0",
 };
 
-// usertest use `spawn` instead of `fork` + `exec`
-
 int main()
 {
 	int num_test = sizeof(TESTS) / sizeof(char *);
-	for (int i = 0; i < num_test; ++i) {
-		char *test = TESTS[i];
-		printf("Usertests: Running %s\n", test);
-		int pid = spawn(test);
-		int xstate = 0;
-		int wait_pid = waitpid(pid, &xstate);
-		assert_eq(pid, wait_pid);
-		printf("Usertests: Test %s in Process %d exited with code %d\n",
-		       test, pid, xstate);
-	}
+	int succ = run_tests(TESTS, num_test);
+	assert_eq(succ, num_test);
 	puts("ch5 Mergetests passed!");
 	return 0;
 }
