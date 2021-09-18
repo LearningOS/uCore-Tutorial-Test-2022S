@@ -4,7 +4,7 @@ ARCH ?= riscv64
 MODE ?= release
 CHAPTER ?= 
 app_dir = src
-src_dir := build/$(ARCH)
+elf_dir := build/$(ARCH)
 bin_dir := build/bin
 out_dir := target
 cmake_build_args := -DARCH=$(ARCH) -DCHAPTER=$(CHAPTER)
@@ -94,7 +94,7 @@ del:
 target: binary del
 	@echo tests=$(CH_TESTS)
 	@$(foreach t, $(CH_TESTS), cp $(bin_dir)/$(t)* $(out_dir)/bin/;)
-	# @$(foreach t, $(CH_TESTS), cp $(elf_dir)/$(t)* $(out_dir)/elf/;)
+	@$(foreach t, $(CH_TESTS), cp $(elf_dir)/$(t)* $(out_dir)/elf/;)
 
 clean:
 	@rm -rf asm build target

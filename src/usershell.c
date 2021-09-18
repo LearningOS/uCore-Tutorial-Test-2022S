@@ -11,7 +11,7 @@ const unsigned char CR = 0x0d;
 const unsigned char DL = 0x7f;
 const unsigned char BS = 0x08;
 
-char line[MAX_STR_LEN] = {};
+char line[MAX_STR_LEN];
 char *argv[MAX_ARG_NUM];
 
 int top = 0;
