@@ -15,6 +15,6 @@ int main()
 	assert_eq(0, mmap((void *)start, len, prot, MAP_ANONYMOUS, -1));
 	assert_eq(munmap((void *)start, len + 1), -1);
 	assert_eq(munmap((void *)(start + 1), len - 1), -1);
-	puts("Test 04_6 ummap2 OK!");
+	puts("Test 04_5 ummap2 OK!");
 	return 0;
 }

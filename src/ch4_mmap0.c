@@ -21,6 +21,6 @@ int main()
 		uint8 *addr = (uint8 *)i;
 		assert_eq(*addr, (uint8)i);
 	}
-	puts("Test 04_1 OK!");
+	puts("Test 04_0 OK!");
 	return 0;
 }
