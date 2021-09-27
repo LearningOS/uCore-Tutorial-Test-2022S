@@ -29,7 +29,7 @@ CH7_BASE_TESTS := ch7b_ $(CH6_BASE_TESTS)
 CH2_TESTS := ch2b_ ch2t_
 CH3_TESTS_BASE := ch3b_ $(CH2_TESTS) ch3_
 CH3_SCHED_TEST := ch3t_
-CH4_TESTS := $(CH4_BASE_TESTS) ch4_
+CH4_TESTS := $(CH4_BASE_TESTS) ch4_ ch3b_sleep
 CH5_TESTS := ch5b_ $(CH4_TESTS) usershell # ch5_ 
 CH6_TESTS := ch6b_ $(CH5_TESTS) ch6_
 CH7_TESTS := ch7b_ $(CH6_TESTS) ch7_
@@ -59,7 +59,7 @@ else ifeq ($(CHAPTER), 3t)
 else ifeq ($(CHAPTER), 4)
 	CH_TESTS := $(CH4_TESTS)
 else ifeq ($(CHAPTER), 4_3)
-	CH_TESTS := $(CH4_TESTS) ch3b_sleep
+	CH_TESTS := $(CH4_BASE_TESTS) ch3b_sleep
 else ifeq ($(CHAPTER), 4_only)
 	CH_TESTS := ch4_ ch4b_
 else ifeq ($(CHAPTER), 5)
