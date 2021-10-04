@@ -7,7 +7,7 @@
 const char *TESTS[] = {
 	"ch2b_hello_world\0", "ch2b_power\0",	  "ch2b_write1\0",
 	"ch3b_sleep\0",	      "ch3b_sleep1\0",	  "ch3b_yield0\0",
-	"ch3b_yield1\0",      "ch3b_yield2\0",	  "ch5b_gitpid\0",
+	"ch3b_yield1\0",      "ch3b_yield2\0",	  "ch5b_getpid\0",
 	"ch5b_forktest0\0",   "ch5b_forktest1\0", "ch5b_forktest2\0",
 	"ch4_mmap0\0",	      "ch4_mmap1\0",	  "ch4_mmap2\0",
 	"ch4_mmap3\0",	      "ch4_unmap0\0",	  "ch4_unmap1\0",
