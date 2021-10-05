@@ -22,4 +22,20 @@ int run_tests(const char *tests[], int n)
 	return success;
 }
 
+int test(const char *succs, int nsucc, const char *fails, int nfail,
+	 const char *message)
+{
+	if (succs && nsucc > 0) {
+		int succ_count = run_tests(succs, nsucc);
+		assert_eq(succ_count, nsucc);
+	}
+	if (fails && nfail > 0) {
+		int fail_count = run_tests(fails, nfail);
+		assert_eq(fail_count, 0);
+	}
+	if (message)
+		puts(message);
+	return 0;
+}
+
 #endif // USER_TEST
