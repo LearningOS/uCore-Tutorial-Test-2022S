@@ -10,7 +10,7 @@ const int BUF_LEN = 256;
 int main()
 {
 	int pid = fork();
-	if (pid, 0) {
+	if (pid == 0) {
 		puts("I am child");
 		char buffer[BUF_LEN];
 		memset(buffer, 0, sizeof(buffer));
