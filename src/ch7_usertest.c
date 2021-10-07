@@ -28,6 +28,6 @@ int main()
 {
 	int nsucc = sizeof(TESTS) / sizeof(char *);
 	int nfail = sizeof(FAILS) / sizeof(char *);
-	test(TESTS, nsucc, FAILS, nfail, "ch7 Usertests shmem passed!");
+	test(TESTS, nsucc, FAILS, nfail, "ch7 Usertests passed!");
 	return 0;
 }

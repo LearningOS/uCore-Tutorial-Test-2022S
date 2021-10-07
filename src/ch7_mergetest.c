@@ -26,6 +26,6 @@ int main()
 {
 	int nsucc = sizeof(TESTS) / sizeof(char *);
 	int nfail = sizeof(FAILS) / sizeof(char *);
-	test(TESTS, nsucc, FAILS, nfail, "ch7 Mergetests shmem passed!");
+	test(TESTS, nsucc, FAILS, nfail, "ch7 Mergetests passed!");
 	return 0;
 }
