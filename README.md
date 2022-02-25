@@ -1,6 +1,6 @@
 # uCore-Tutorial-Tests
 
-User testcases for [uCore-Tutorial-v2](https://github.com/DeathWish5/uCore-Tutorial-v2).
+User testcases for [uCore-Tutorial-Tutorial-2022S](https://github.com/learningos/uCore-Tutorial-Tutorial-2022S).
 
 ### Usage
 
