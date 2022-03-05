@@ -60,6 +60,8 @@ typedef __builtin_va_list va_list;
 
 #define AT_FDCWD -100
 
+#define MAX_SYSCALL_NUM 500
+
 typedef struct {
 	uint64 sec; // 自 Unix 纪元起的秒数
 	uint64 usec; // 微秒数
@@ -72,6 +74,19 @@ typedef struct {
 	uint32 nlink; // 硬链接数量，初始为1
 	uint64 pad[7]; // 无需考虑，为了兼容性设计
 } Stat;
+
+typedef enum {
+	UnInit,
+	Ready,
+	Running,
+	Exited,
+} TaskStatus;
+
+typedef struct {
+	TaskStatus status;
+	unsigned int syscall_times[MAX_SYSCALL_NUM];
+	int time;
+} TaskInfo;
 
 #define MAP_ANONYMOUS (0)
 #define MAP_SHARED (1)

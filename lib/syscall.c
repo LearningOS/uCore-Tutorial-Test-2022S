@@ -92,6 +92,11 @@ int sleep(unsigned long long time)
 	return 0;
 }
 
+int sys_task_info(TaskInfo *ti)
+{
+	return syscall(SYS_task_info, ti);
+}
+
 int set_priority(int prio)
 {
 	return syscall(SYS_setpriority, prio);
