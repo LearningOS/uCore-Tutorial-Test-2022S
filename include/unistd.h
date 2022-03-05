@@ -14,7 +14,7 @@ void exit(int);
 int fork();
 int exec(char *, char **);
 int waitpid(int, int *);
-int64 get_time();
+int64 get_mtime();
 int sys_get_time(TimeVal *ts,
 		 int tz); // syscall ID: 169; tz 表示时区，这里无需考虑，始终为0;
 // 返回值：正确返回 0，错误返回 -1。

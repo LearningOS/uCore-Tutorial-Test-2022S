@@ -284,3 +284,4 @@
 #define __NR_spawn 400
 #define __NR_mailread 401
 #define __NR_mailwrite 402
+#define __NR_task_info 410
