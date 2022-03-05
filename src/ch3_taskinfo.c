@@ -8,6 +8,10 @@
 #define SYSCALL_GETTIMEOFDAY 169
 #define SYSCALL_TASK_INFO 410
 
+/// 正确输出：（无报错信息）
+/// hello task!
+/// Test task info OK!
+
 int main()
 {
 	int64 t1 = get_mtime();
@@ -26,7 +30,7 @@ int main()
 	assert(info.time < t3 - t1 + 10);
 	assert(Running == info.status);
 
-	puts("hello world!");
+	puts("hello task!");
 	int64 t4 = get_mtime();
 	// 想想为什么 write 调用是两次
 	assert(sys_task_info(&info) == 0);
@@ -39,5 +43,6 @@ int main()
 	assert(t4 - t1 <= info.time);
 	assert(info.time < t5 - t1 + 10);
 	assert(Running == info.status);
+	puts("Test task info OK!");
 	return 0;
 }
