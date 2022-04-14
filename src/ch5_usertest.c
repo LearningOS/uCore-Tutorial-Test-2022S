@@ -11,6 +11,7 @@ const char *TESTS[] = {
 	"ch5b_forktest0\0",   "ch5b_forktest1\0", "ch5b_forktest2\0",
 	"ch4_mmap0\0",	      "ch4_mmap3\0",	  "ch4_unmap0\0",
 	"ch4_unmap1\0",	      "ch5_spawn0\0",	  "ch5_spawn1\0",
+	"ch5_setprio\0",
 };
 
 const char *FAILS[] = {
