@@ -5,8 +5,8 @@
 /// 辅助测例，运行所有其他测例。
 
 const char *TESTS[] = {
-	"ch5t_stride0\0",	  "ch5t_stride1\0",   "ch5t_stride1\0",
-    "ch5t_stride2\0",	  "ch5t_stride3\0",   "ch5t_stride4\0",
+	"ch5t_stride0\0",	  "ch5t_stride1\0",   "ch5t_stride2\0",
+    "ch5t_stride3\0",	  "ch5t_stride4\0",   "ch5t_stride5\0",
 };
 
 const char *FAILS[] = {
