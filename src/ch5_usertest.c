@@ -28,6 +28,9 @@ int main()
         int wait_pid = waitpid(pid[i], &exit_pid);
         assert_eq(wait_pid, pid[i]);
     }
+	int stride_pid = spawn("ch5t_usertest\0");
+	int wait_pid = wait_pid(stride_pid, &exit_pid);
+	assert_eq(wait_pid, stride_pid);
     puts("ch5 Usertests passed!");
 	return 0;
 }
