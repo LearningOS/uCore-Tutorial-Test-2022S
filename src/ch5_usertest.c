@@ -28,6 +28,6 @@ int main()
         int wait_pid = waitpid(pid[i], &exit_pid);
         assert_eq(wait_pid, pid[i]);
     }
-    puts("ch5 usertest passed!");
+    puts("ch5 usertests passed!");
 	return 0;
 }
