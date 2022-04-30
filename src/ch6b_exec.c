@@ -7,6 +7,6 @@ int main()
 	char *_argv[] = {
 		"(*o*)", "(>.<)", "(O.O)", "(QwQ)", "orz", "没有了呀"
 	};
-	exec("ch7b_args", _argv);
+	exec("ch6b_args", _argv);
 	return 0;
 }

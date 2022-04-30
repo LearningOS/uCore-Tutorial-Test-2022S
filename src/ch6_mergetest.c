@@ -12,7 +12,9 @@ const char *TESTS[] = {
 	"ch5b_forktest0\0",   "ch5b_forktest1\0", "ch5b_forktest2\0",
 	"ch4_mmap0\0",	      "ch4_mmap3\0",	  "ch4_unmap0\0",
 	"ch4_unmap1\0",	      "ch5_spawn0\0",	  "ch5_spawn1\0",
-	"ch6b_pipetest\0",
+	"ch6b_pipetest\0",    "ch6_mail0\0",	  "ch6_mail1\0",
+	"ch6_mail2\0",	      "ch6_mail3\0",	  "ch7b_filetest\0",
+	"ch7b_exec\0",
 };
 
 const char *FAILS[] = {
@@ -24,6 +26,6 @@ int main()
 {
 	int nsucc = sizeof(TESTS) / sizeof(char *);
 	int nfail = sizeof(FAILS) / sizeof(char *);
-	test(TESTS, nsucc, FAILS, nfail, "ch6 Mergetests passed!");
+	test(TESTS, nsucc, FAILS, nfail, "ch7 Mergetests passed!");
 	return 0;
 }
