@@ -83,7 +83,7 @@ endif
 
 binary:
 	@mkdir -p build
-	@cd build && CHAPTER=$(CHAPTER) cmake $(cmake_build_args) .. && make -j`proc`
+	@cd build && CHAPTER=$(CHAPTER) cmake $(cmake_build_args) .. && make -j`nproc`
 	@mkdir -p asm
 	@$(CP) build/asm/* asm
 
