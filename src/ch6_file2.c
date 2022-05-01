@@ -15,6 +15,7 @@ int main()
 	char *lname2 = "linkname2";
 
 	int fd = open(fname, O_CREATE | O_WRONLY);
+	assert(fd > 0);
 	link(fname, lname0);
 	Stat stat;
 	fstat(fd, &stat);

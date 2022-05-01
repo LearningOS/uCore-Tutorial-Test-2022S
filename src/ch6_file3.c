@@ -15,7 +15,7 @@ void repeat(char *target, const char *template, int times)
 char test_str[4096];
 int main()
 {
-	char fname[] = "fname0";
+	char fname[] = "fname3-0";
 	puts("build");
 	repeat(test_str,
 	       "some random long long long long long long long long string",
@@ -23,7 +23,7 @@ int main()
 	int len = strlen(test_str);
 	puts("start iteration");
 	for (int i = 0; i < 10; i++) {
-		fname[5] = '0' + i; // change fname to "fname%d"
+		fname[7] = '0' + i; // change fname to "fname%d"
 		int fd = open(fname, O_CREATE | O_WRONLY);
 		assert(fd > 0);
 		for (int j = 0; j < 50; j++) {
