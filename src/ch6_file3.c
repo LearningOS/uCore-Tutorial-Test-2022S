@@ -31,6 +31,7 @@ int main()
 		}
 		close(fd);
 		assert_eq(unlink(fname), 0);
+		assert(open(fname, O_RDONLY) < 0);
 		printf("test iteration %d\n", i);
 	}
 	puts("Test mass open/unlink OK!");
