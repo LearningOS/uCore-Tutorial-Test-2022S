@@ -20,6 +20,7 @@ int getchar()
 
 static char buffer[__LINE_WIDTH];
 static int buffer_len;
+static int buffer_locked;
 
 // Returns: number of chars written, negative for failure
 // Warn: buffer_len[f] will not be changed
@@ -55,6 +56,11 @@ static int out(int f, const char *s, size_t l)
 {
 	if (f != stdout)
 		return write(f, s, l);
+
+	while(buffer_locked != 0) {
+		sched_yield();
+	}
+	buffer_locked = 1;
 	int ret = 0;
 	for (size_t i = 0; i < l; i++) {
 		char c = s[i];
@@ -62,13 +68,18 @@ static int out(int f, const char *s, size_t l)
 		if (buffer_len == __LINE_WIDTH || c == '\n') {
 			int r = __write_buffer();
 			__clear_buffer(f);
-			if (r < 0)
+			if (r < 0) {
+				buffer_locked = 0;
 				return r;
-			if (r < buffer_len)
+			}
+			if (r < buffer_len) {
+				buffer_locked = 0;
 				return ret + r;
+			}
 			ret += r;
 		}
 	}
+	buffer_locked = 0;
 	return ret;
 }
 
