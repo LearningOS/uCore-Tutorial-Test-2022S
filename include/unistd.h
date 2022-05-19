@@ -34,5 +34,8 @@ int sys_linkat(int olddirfd, char *oldpath, int newdirfd, char *newpath,
 int sys_unlinkat(int dirfd, char *path, unsigned int flags);
 int link(char *old_path, char *new_path);
 int unlink(char *path);
+int thread_create(void *entry, void *arg);
+int gettid(void);
+int waittid(int tid);
 
 #endif // __UNISTD_H__

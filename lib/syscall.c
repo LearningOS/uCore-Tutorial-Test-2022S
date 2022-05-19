@@ -162,3 +162,23 @@ int unlink(char *path)
 {
 	return sys_unlinkat(AT_FDCWD, path, 0);
 }
+
+int thread_create(void *entry, void *arg)
+{
+	return syscall(SYS_thread_create, (uint64)entry, (uint64)arg);
+}
+
+int gettid(void)
+{
+	return syscall(SYS_gettid);
+}
+
+int waittid(int tid)
+{
+	int ret = syscall(SYS_waittid, tid);
+	while (ret == -2) {
+		sched_yield();
+		ret = syscall(SYS_waittid, tid);
+	}
+	return ret;
+}

@@ -282,3 +282,16 @@
 #define SYS_mailread 401
 #define SYS_mailwrite 402
 #define SYS_task_info 410
+#define SYS_thread_create 460
+#define SYS_waittid 462
+#define SYS_mutex_create 463
+#define SYS_mutex_lock 464
+#define SYS_mutex_try_lock 465
+#define SYS_mutex_unlock 466
+#define SYS_semaphore_create 467
+#define SYS_semaphore_up 468
+#define SYS_semaphore_try_up 469
+#define SYS_semaphore_down 470
+#define SYS_condvar_create 471
+#define SYS_condvar_signal 472
+#define SYS_condvar_wait 473
