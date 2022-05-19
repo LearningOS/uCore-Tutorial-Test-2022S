@@ -9,9 +9,9 @@ struct thread_arg {
 	char c;
 	int ret_code;
 } args[NTHREAD] = {
-	{ .c = 'a', .ret_code = 1 },
-	{ .c = 'b', .ret_code = 2 },
-	{ .c = 'c', .ret_code = 3 },
+	{ 'a', 1 },
+	{ 'b', 2 },
+	{ 'c', 3 },
 };
 
 void thread(struct thread_arg *arg)

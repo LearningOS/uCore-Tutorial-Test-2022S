@@ -182,3 +182,53 @@ int waittid(int tid)
 	}
 	return ret;
 }
+
+int mutex_create()
+{
+	return syscall(SYS_mutex_create, 0);
+}
+
+int mutex_blocking_create()
+{
+	return syscall(SYS_mutex_create, 1);
+}
+
+int mutex_lock(int mid)
+{
+	return syscall(SYS_mutex_lock, mid);
+}
+
+int mutex_unlock(int mid)
+{
+	return syscall(SYS_mutex_unlock, mid);
+}
+
+int semaphore_create(int res_count)
+{
+	return syscall(SYS_semaphore_create, res_count);
+}
+
+int semaphore_up(int sid)
+{
+	return syscall(SYS_semaphore_up, sid);
+}
+
+int semaphore_down(int sid)
+{
+	return syscall(SYS_semaphore_down, sid);
+}
+
+int condvar_create()
+{
+	return syscall(SYS_condvar_create);
+}
+
+int condvar_signal(int cid)
+{
+	return syscall(SYS_condvar_signal, cid);
+}
+
+int condvar_wait(int cid, int mid)
+{
+	return syscall(SYS_condvar_wait, cid, mid);
+}

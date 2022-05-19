@@ -37,5 +37,15 @@ int unlink(char *path);
 int thread_create(void *entry, void *arg);
 int gettid(void);
 int waittid(int tid);
+int mutex_create();
+int mutex_blocking_create();
+int mutex_lock(int mid);
+int mutex_unlock(int mid);
+int semaphore_create(int res_count);
+int semaphore_up(int sid);
+int semaphore_down(int sid);
+int condvar_create();
+int condvar_signal(int cid);
+int condvar_wait(int cid, int mid);
 
 #endif // __UNISTD_H__
