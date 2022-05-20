@@ -13,13 +13,14 @@
 typedef __builtin_va_list va_list;
 typedef unsigned long int uintmax_t;
 typedef long int intmax_t;
+extern int buffer_lock_enabled;
 
 int getchar();
 int putchar(int);
 int puts(const char *s);
 void printf(const char *fmt, ...);
 int fflush(int);
-void init_thread_io_buffer();
+void enable_thread_io_buffer();
 
 #define EOF (-1)
 

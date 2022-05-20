@@ -22,7 +22,7 @@ int getchar()
 static char buffer[__LINE_WIDTH];
 static int buffer_len;
 static int buffer_lock;
-static int buffer_lock_init = 0;
+int buffer_lock_enabled = 0;
 
 // Returns: number of chars written, negative for failure
 // Warn: buffer_len[f] will not be changed
@@ -51,7 +51,7 @@ int fflush(int fd)
 {
 	if (fd == 1) {
 		int len = 0;
-		if (buffer_lock_init == 1) {
+		if (buffer_lock_enabled == 1) {
 			// for multiple threads io
 			mutex_lock(buffer_lock);
 			len = __fflush();
@@ -64,14 +64,13 @@ int fflush(int fd)
 	return 0;
 }
 
-// init_thread_io_buffer must be called before use mutiple thread stdout
-void init_thread_io_buffer()
+// enable_thread_io_buffer must be called before use mutiple thread stdout
+void enable_thread_io_buffer()
 {
 	// Assume it's in single thread so there is no consistency problem
-	// for buffer_lock and buffer_lock_init
+	// for buffer_lock and buffer_lock_enabled
 	assert((buffer_lock = mutex_create()) >= 0);
-	printf("init_thread_io_buffer get lock id %d\n", buffer_lock);
-	buffer_lock_init = 1;
+	buffer_lock_enabled = 1;
 }
 
 static int out_unlocked(const char *s, size_t l)
@@ -102,7 +101,7 @@ static int out(int f, const char *s, size_t l)
 	if (f != stdout)
 		return write(f, s, l);
 	int len = 0;
-	if (buffer_lock_init == 1) {
+	if (buffer_lock_enabled == 1) {
 		// for multiple threads io
 		mutex_lock(buffer_lock);
 		len = out_unlocked(s, l);

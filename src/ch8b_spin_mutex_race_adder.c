@@ -22,7 +22,7 @@ void fun()
 		// Force to extend the time of a++
 		int old_a = a;
 		for (int i = 0; i < 500; i++) {
-			t = t * t / 10007;
+			t = t * t % 10007;
 		}
 		a = old_a + 1;
 		// A time cost a++ ends
@@ -35,7 +35,6 @@ int main()
 {
 	int64 start = get_mtime();
 	assert((mutex_id = mutex_create()) >= 0);
-	init_thread_io_buffer();
 	for (int i = 0; i < thread_count; i++) {
 		threads[i] = thread_create(fun, 0);
 		assert(threads[i] > 0);

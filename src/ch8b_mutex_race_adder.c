@@ -14,18 +14,16 @@ int a;
 
 int threads[thread_count];
 
-void fun()
+void fun(long i)
 {
-	int t = 2;
+	int t = i + 1;
 	for (int i = 0; i < per_thread; i++) {
 		mutex_lock(mutex_id);
-		// Force to extend the time of a++
 		int old_a = a;
 		for (int i = 0; i < 500; i++) {
-			t = t * t / 10007;
+			t = t * t % 10007;
 		}
 		a = old_a + 1;
-		// A time cost a++ ends
 		mutex_unlock(mutex_id);
 	}
 	exit(t);
@@ -35,13 +33,13 @@ int main()
 {
 	int64 start = get_mtime();
 	assert((mutex_id = mutex_blocking_create()) >= 0);
-	init_thread_io_buffer();
 	for (int i = 0; i < thread_count; i++) {
-		threads[i] = thread_create(fun, 0);
+		threads[i] = thread_create(fun, (void *)i);
 		assert(threads[i] > 0);
 	}
 	for (int i = 0; i < thread_count; i++) {
-		waittid(threads[i]);
+		int rc = waittid(threads[i]);
+		printf("thread %d return with code %d\n", threads[i], rc);
 	}
 	int64 stop = get_mtime();
 	printf("time cost is %d ms\n", (int)(stop - start));

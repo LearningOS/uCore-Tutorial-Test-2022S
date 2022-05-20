@@ -25,7 +25,6 @@ void thread(struct thread_arg *arg)
 
 int main(void)
 {
-	init_thread_io_buffer();
 	int tids[NTHREAD];
 	for (int i = 0; i < NTHREAD; ++i) {
 		tids[i] = thread_create(thread, &args[i]);

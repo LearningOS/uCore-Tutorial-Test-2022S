@@ -38,7 +38,6 @@ int main()
 {
 	assert((condvar_id = condvar_create()) >= 0);
 	assert((mutex_id = mutex_blocking_create()) >= 0);
-	init_thread_io_buffer();
 	int t1 = thread_create(first, 0);
 	int t2 = thread_create(second, 0);
 	waittid(t1);

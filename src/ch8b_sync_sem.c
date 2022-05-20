@@ -24,13 +24,14 @@ void second()
 
 int main()
 {
-	assert((sem_sync_id = semaphore_create(0)) >= 0);
-	init_thread_io_buffer();
+	assert((sem_sync_id = semaphore_create(1)) >= 0);
+	semaphore_down(sem_sync_id);
 	int threads[2];
 	threads[0] = thread_create(first, 0);
 	threads[1] = thread_create(second, 0);
 	waittid(threads[0]);
 	waittid(threads[1]);
+	semaphore_up(sem_sync_id);
 	puts("sync_sem passed!");
 	return 0;
 }

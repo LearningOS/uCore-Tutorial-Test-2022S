@@ -1,6 +1,7 @@
 #include "syscall.h"
 #include <stddef.h>
 #include <unistd.h>
+#include <stdio.h>
 
 void __write_buffer();
 void __clear_buffer();
@@ -165,6 +166,10 @@ int unlink(char *path)
 
 int thread_create(void *entry, void *arg)
 {
+	// on first thread create enable, here must be single thread
+	if (!buffer_lock_enabled) {
+		enable_thread_io_buffer();
+	}
 	return syscall(SYS_thread_create, (uint64)entry, (uint64)arg);
 }
 
