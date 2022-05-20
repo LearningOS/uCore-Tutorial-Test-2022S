@@ -31,6 +31,7 @@ void thread_c()
 
 int main(void)
 {
+	init_thread_io_buffer();
 	int tids[NTHREAD];
 	tids[0] = thread_create(thread_a, 0);
 	tids[1] = thread_create(thread_b, 0);

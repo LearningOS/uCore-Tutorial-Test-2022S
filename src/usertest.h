@@ -5,7 +5,7 @@ int run_tests(const char *tests[], int n)
 {
 	int success = 0;
 	for (int i = 0; i < n; ++i) {
-		char *test = tests[i];
+		const char *test = tests[i];
 		printf("Usertests: Running %s\n", test);
 		int pid = fork();
 		if (pid == 0) {
@@ -22,7 +22,7 @@ int run_tests(const char *tests[], int n)
 	return success;
 }
 
-int test(const char *succs, int nsucc, const char *fails, int nfail,
+int test(const char *succs[], int nsucc, const char *fails[], int nfail,
 	 const char *message)
 {
 	if (succs && nsucc > 0) {

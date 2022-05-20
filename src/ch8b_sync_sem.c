@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 
-const int sem_sync_id = 0;
+int sem_sync_id;
 
 void first()
 {
@@ -24,7 +24,8 @@ void second()
 
 int main()
 {
-	assert_eq(semaphore_create(0), sem_sync_id);
+	assert((sem_sync_id = semaphore_create(0)) >= 0);
+	init_thread_io_buffer();
 	int threads[2];
 	threads[0] = thread_create(first, 0);
 	threads[1] = thread_create(second, 0);

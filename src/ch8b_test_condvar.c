@@ -5,8 +5,8 @@
 #include <unistd.h>
 
 int a = 0;
-const condvar_id = 0;
-const mutex_id = 0;
+int condvar_id;
+int mutex_id;
 
 void first()
 {
@@ -36,8 +36,9 @@ void second()
 
 int main()
 {
-	assert_eq(condvar_create(), condvar_id);
-	assert_eq(mutex_blocking_create(), mutex_id);
+	assert((condvar_id = condvar_create()) >= 0);
+	assert((mutex_id = mutex_blocking_create()) >= 0);
+	init_thread_io_buffer();
 	int t1 = thread_create(first, 0);
 	int t2 = thread_create(second, 0);
 	waittid(t1);

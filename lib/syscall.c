@@ -62,7 +62,7 @@ int waitpid(int pid, int *code)
 }
 
 static char **null = { 0 };
-int exec(char *name, char **argv)
+int exec(const char *name, char **argv)
 {
 	return syscall(SYS_execve, name, argv == 0 ? null : argv);
 }
@@ -117,7 +117,7 @@ int wait(int *code)
 	return waitpid(-1, code);
 }
 
-int spawn(char *file)
+int spawn(const char *file)
 {
 	return syscall(SYS_spawn, file);
 }

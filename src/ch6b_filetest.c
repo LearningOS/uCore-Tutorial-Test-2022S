@@ -15,7 +15,7 @@ int main()
 	close(fd);
 	puts("write over.");
 	int pid = fork();
-	if (fork(), 0) {
+	if (pid == 0) {
 		int fd = open("test\0", O_RDONLY);
 		str[read(fd, str, len)] = 0;
 		puts(str);

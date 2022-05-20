@@ -12,7 +12,7 @@ pid_t getppid();
 int sched_yield();
 void exit(int);
 int fork();
-int exec(char *, char **);
+int exec(const char *, char **);
 int waitpid(int, int *);
 int64 get_mtime();
 int sys_get_time(TimeVal *ts,
@@ -24,7 +24,7 @@ int set_priority(int prio);
 int mmap(void *start, unsigned long long len, int prot, int flag, int shmem_id);
 int munmap(void *start, unsigned long long len);
 int wait(int *);
-int spawn(char *file);
+int spawn(const char *file);
 int pipe(void *p);
 int mailread(void *buf, int len);
 int mailwrite(int pid, void *buf, int len);

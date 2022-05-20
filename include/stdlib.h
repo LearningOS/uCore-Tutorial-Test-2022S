@@ -2,6 +2,7 @@
 #define __STDLIB_H__
 
 #include "stddef.h"
+#include "stdio.h"
 
 extern pid_t getpid();
 extern char *basename(char *);

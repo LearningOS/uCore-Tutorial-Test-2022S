@@ -8,7 +8,7 @@
 // becase 1(main thread) + 15 = 16 is NTHREAD
 #define thread_count (15)
 #define per_thread (100)
-const int mid = 0;
+int mutex_id;
 
 int a;
 
@@ -18,7 +18,7 @@ void fun()
 {
 	int t = 2;
 	for (int i = 0; i < per_thread; i++) {
-		mutex_lock(mid);
+		mutex_lock(mutex_id);
 		// Force to extend the time of a++
 		int old_a = a;
 		for (int i = 0; i < 500; i++) {
@@ -26,7 +26,7 @@ void fun()
 		}
 		a = old_a + 1;
 		// A time cost a++ ends
-		mutex_unlock(mid);
+		mutex_unlock(mutex_id);
 	}
 	exit(t);
 }
@@ -34,7 +34,8 @@ void fun()
 int main()
 {
 	int64 start = get_mtime();
-	assert_eq(mutex_blocking_create(), mid);
+	assert((mutex_id = mutex_blocking_create()) >= 0);
+	init_thread_io_buffer();
 	for (int i = 0; i < thread_count; i++) {
 		threads[i] = thread_create(fun, 0);
 		assert(threads[i] > 0);

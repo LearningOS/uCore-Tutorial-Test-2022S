@@ -8,50 +8,57 @@
 #define producers (4)
 #define number_per_producer (100)
 
-int sem_mutex_id = 0;
-int sem_empty_id = 1;
-int sem_existed_id = 2;
+int sem_mutex_id;
+int sem_empty_id;
+int sem_existed_id;
 
 int buffer[buffer_size];
 int front = 0;
 int tail = 0;
-int threads[producers];
+int threads[producers + 1];
 
 void producer(int id)
 {
+	printf("producer %d started task\n", id);
 	for (int i = 0; i < number_per_producer; i++) {
 		semaphore_down(sem_empty_id);
 		semaphore_down(sem_mutex_id);
 		buffer[front] = id;
 		front = (front + 1) % buffer_size;
 		semaphore_up(sem_mutex_id);
-		semaphore_up(sem_empty_id);
+		semaphore_up(sem_existed_id);
 	}
+	printf("producer %d finished task\n", id);
 	exit(0);
 }
 
 void consumer()
 {
+	puts("consumer started task");
 	for (int i = 0; i < number_per_producer * producers; i++) {
 		semaphore_down(sem_existed_id);
 		semaphore_down(sem_mutex_id);
 		printf("%d ", buffer[tail]);
 		tail = (tail + 1) % buffer_size;
 		semaphore_up(sem_mutex_id);
-		semaphore_up(sem_existed_id);
+		semaphore_up(sem_empty_id);
 	}
+	puts("consumer finished task");
+	exit(0);
 }
 
 int main()
 {
-	assert_eq(semaphore_create(1), sem_mutex_id);
-	assert_eq(semaphore_create(buffer_size), sem_empty_id);
-	assert_eq(semaphore_create(0), sem_existed_id);
+	assert((sem_mutex_id = semaphore_create(1)) >= 0);
+	assert((sem_empty_id = semaphore_create(buffer_size)) >= 0);
+	assert((sem_existed_id = semaphore_create(0)) >= 0);
+	init_thread_io_buffer();
 	for (int i = 0; i < producers; i++) {
 		threads[i] = thread_create(producer, (void *)i);
 		assert(threads[i] > 0);
 	}
-	for (int i = 0; i < producers; i++) {
+	threads[producers] = thread_create(consumer, 0);
+	for (int i = 0; i <= producers; i++) {
 		waittid(threads[i]);
 	}
 	puts("mpsc_sem passed!");

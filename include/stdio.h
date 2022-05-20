@@ -19,6 +19,7 @@ int putchar(int);
 int puts(const char *s);
 void printf(const char *fmt, ...);
 int fflush(int);
+void init_thread_io_buffer();
 
 #define EOF (-1)
 

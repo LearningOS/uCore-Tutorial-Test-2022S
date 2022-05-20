@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -20,7 +21,8 @@ int getchar()
 
 static char buffer[__LINE_WIDTH];
 static int buffer_len;
-static int buffer_locked;
+static int buffer_lock;
+static int buffer_lock_init = 0;
 
 // Returns: number of chars written, negative for failure
 // Warn: buffer_len[f] will not be changed
@@ -47,40 +49,68 @@ int __fflush()
 
 int fflush(int fd)
 {
-	if (fd == 1)
-		return __fflush();
+	if (fd == 1) {
+		int len = 0;
+		if (buffer_lock_init == 1) {
+			// for multiple threads io
+			mutex_lock(buffer_lock);
+			len = __fflush();
+			mutex_unlock(buffer_lock);
+		} else {
+			len = __fflush();
+		}
+		return len;
+	}
 	return 0;
+}
+
+// init_thread_io_buffer must be called before use mutiple thread stdout
+void init_thread_io_buffer()
+{
+	// Assume it's in single thread so there is no consistency problem
+	// for buffer_lock and buffer_lock_init
+	assert((buffer_lock = mutex_create()) >= 0);
+	printf("init_thread_io_buffer get lock id %d\n", buffer_lock);
+	buffer_lock_init = 1;
+}
+
+static int out_unlocked(const char *s, size_t l)
+{
+	int ret = 0;
+	for (size_t i = 0; i < l; i++) {
+		char c = s[i];
+		buffer[buffer_len++] = c;
+		if (buffer_len >= __LINE_WIDTH || c == '\n') {
+			// check overflow
+			assert(buffer_len <= __LINE_WIDTH);
+			int r = __write_buffer();
+			__clear_buffer();
+			if (r < 0) {
+				return r;
+			}
+			if (r < buffer_len) {
+				return ret + r;
+			}
+			ret += r;
+		}
+	}
+	return ret;
 }
 
 static int out(int f, const char *s, size_t l)
 {
 	if (f != stdout)
 		return write(f, s, l);
-
-	while(buffer_locked != 0) {
-		sched_yield();
+	int len = 0;
+	if (buffer_lock_init == 1) {
+		// for multiple threads io
+		mutex_lock(buffer_lock);
+		len = out_unlocked(s, l);
+		mutex_unlock(buffer_lock);
+	} else {
+		len = out_unlocked(s, l);
 	}
-	buffer_locked = 1;
-	int ret = 0;
-	for (size_t i = 0; i < l; i++) {
-		char c = s[i];
-		buffer[buffer_len++] = c;
-		if (buffer_len == __LINE_WIDTH || c == '\n') {
-			int r = __write_buffer();
-			__clear_buffer(f);
-			if (r < 0) {
-				buffer_locked = 0;
-				return r;
-			}
-			if (r < buffer_len) {
-				buffer_locked = 0;
-				return ret + r;
-			}
-			ret += r;
-		}
-	}
-	buffer_locked = 0;
-	return ret;
+	return len;
 }
 
 int putchar(int c)
