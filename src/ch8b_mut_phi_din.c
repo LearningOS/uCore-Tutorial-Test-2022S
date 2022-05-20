@@ -91,5 +91,6 @@ int main()
 		}
 		putchar('\n');
 	}
+	puts("philosopher dining problem with mutex passed!");
 	return 0;
 }
