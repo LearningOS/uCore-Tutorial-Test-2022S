@@ -14,8 +14,10 @@ void first()
 	puts("First work, Change A --> 1 and wakeup Second");
 	mutex_lock(mutex_id);
 	a = 1;
+	puts("First changed A --> 1");
 	condvar_signal(condvar_id);
 	mutex_unlock(mutex_id);
+	puts("First finish the job");
 	exit(0);
 }
 
@@ -34,8 +36,8 @@ void second()
 
 int main()
 {
-	assert(condvar_create() == condvar_id);
-	assert(mutex_blocking_create() == mutex_id);
+	assert_eq(condvar_create(), condvar_id);
+	assert_eq(mutex_blocking_create(), mutex_id);
 	int t1 = thread_create(first, 0);
 	int t2 = thread_create(second, 0);
 	waittid(t1);

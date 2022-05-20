@@ -45,11 +45,15 @@ void consumer()
 int main()
 {
 	assert_eq(semaphore_create(1), sem_mutex_id);
-	assert_eq(semaphore_create(buffer_size), sem_mutex_id);
-	assert_eq(semaphore_create(0), sem_mutex_id);
+	assert_eq(semaphore_create(buffer_size), sem_empty_id);
+	assert_eq(semaphore_create(0), sem_existed_id);
 	for (int i = 0; i < producers; i++) {
 		threads[i] = thread_create(producer, (void *)i);
 		assert(threads[i] > 0);
 	}
+	for (int i = 0; i < producers; i++) {
+		waittid(threads[i]);
+	}
+	puts("mpsc_sem passed!");
 	return 0;
 }

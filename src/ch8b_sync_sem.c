@@ -17,14 +17,14 @@ void first()
 void second()
 {
 	puts("Second want to continue,but need to wait first");
-	semaphore_up(sem_sync_id);
+	semaphore_down(sem_sync_id);
 	puts("Second can work now");
 	exit(0);
 }
 
 int main()
 {
-	assert(semaphore_create(0) == sem_sync_id);
+	assert_eq(semaphore_create(0), sem_sync_id);
 	int threads[2];
 	threads[0] = thread_create(first, 0);
 	threads[1] = thread_create(second, 0);

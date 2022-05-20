@@ -4,7 +4,9 @@
 #include <string.h>
 #include <unistd.h>
 
-#define thread_count (16)
+// Notice that chread_count must be no more than 15,
+// becase 1(main thread) + 15 = 16 is NTHREAD
+#define thread_count (15)
 #define per_thread (100)
 const int mid = 0;
 
@@ -32,7 +34,7 @@ void fun()
 int main()
 {
 	int64 start = get_mtime();
-	assert_eq(mutex_create(), mid);
+	assert_eq(mutex_blocking_create(), mid);
 	for (int i = 0; i < thread_count; i++) {
 		threads[i] = thread_create(fun, 0);
 		assert(threads[i] > 0);
@@ -41,7 +43,7 @@ int main()
 		waittid(threads[i]);
 	}
 	int64 stop = get_mtime();
-	printf("time cost is %lld ms", stop - start);
+	printf("time cost is %d ms\n", (int)(stop - start));
 	assert_eq(a, per_thread * thread_count);
 	return 0;
 }
