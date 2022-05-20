@@ -96,6 +96,6 @@ int main()
 		fail += waittid(threads[i]) != 0;
 	}
 	assert(fail > 0);
-	puts("deadlock test2 OK!");
+	puts("deadlock test semaphore 1 OK!");
 	return 0;
 }

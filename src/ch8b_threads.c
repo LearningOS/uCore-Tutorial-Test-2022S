@@ -41,6 +41,6 @@ int main(void)
 		printf("thread %d exited with code %d\n", tid, exit_code);
 		assert_eq(tid, exit_code);
 	}
-	puts("threads test passed.");
+	puts("threads test passed!");
 	return 0;
 }

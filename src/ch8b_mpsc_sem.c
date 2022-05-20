@@ -21,12 +21,12 @@ void producer(int id)
 {
 	printf("producer %d started task\n", id);
 	for (int i = 0; i < number_per_producer; i++) {
-		semaphore_down(sem_empty_id);
-		semaphore_down(sem_mutex_id);
+		assert_eq(semaphore_down(sem_empty_id), 0);
+		assert_eq(semaphore_down(sem_mutex_id), 0);
 		buffer[front] = id;
 		front = (front + 1) % buffer_size;
-		semaphore_up(sem_mutex_id);
-		semaphore_up(sem_existed_id);
+		assert_eq(semaphore_up(sem_mutex_id), 0);
+		assert_eq(semaphore_up(sem_existed_id), 0);
 	}
 	printf("producer %d finished task\n", id);
 	exit(0);
@@ -36,12 +36,12 @@ void consumer()
 {
 	puts("consumer started task");
 	for (int i = 0; i < number_per_producer * producers; i++) {
-		semaphore_down(sem_existed_id);
-		semaphore_down(sem_mutex_id);
+		assert_eq(semaphore_down(sem_existed_id), 0);
+		assert_eq(semaphore_down(sem_mutex_id), 0);
 		printf("%d ", buffer[tail]);
 		tail = (tail + 1) % buffer_size;
-		semaphore_up(sem_mutex_id);
-		semaphore_up(sem_empty_id);
+		assert_eq(semaphore_up(sem_mutex_id), 0);
+		assert_eq(semaphore_up(sem_empty_id), 0);
 	}
 	puts("consumer finished task");
 	exit(0);
