@@ -12,7 +12,7 @@ const char *TESTS[] = {
 	"ch5b_forktest1\0",   "ch5b_forktest2\0",     "ch6b_filetest\0",
 	"ch6b_exec\0",	      "ch8b_mpsc_sem\0",      "ch8b_mut_race\0",
 	"ch8b_sync_sem\0",    "ch8b_test_condvar\0",  "ch8b_threads_arg\0",
-	"ch8b_threads\0",     "ch8b_spin_mut_race\0",
+	"ch8b_threads\0",     "ch8b_spin_mut_race\0", "ch8b_mut_phi_din\0",
 };
 
 int main()
