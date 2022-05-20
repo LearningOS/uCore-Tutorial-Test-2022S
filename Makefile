@@ -35,7 +35,7 @@ CH5_TESTS_BASE := ch5b_ $(CH4_TESTS) ch5_ ch5t_ usershell
 CH5_SCHED_TEST := ch5t_
 CH6_TESTS := ch6b_ $(CH5_TESTS_BASE) ch6_
 CH7_TESTS := ch7b_ $(CH5_TESTS_BASE) ch7_
-CH8_TESTS := ch8b_ $(CH7_TESTS) ch8_
+CH8_TESTS := $(CH8_BASE_TESTS) ch8_
 
 BASE ?= 0
 
