@@ -237,3 +237,8 @@ int condvar_wait(int cid, int mid)
 {
 	return syscall(SYS_condvar_wait, cid, mid);
 }
+
+int enable_deadlock_detect(int enabled)
+{
+	return syscall(SYS_enable_deadlock_detect, enabled);
+}

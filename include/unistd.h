@@ -47,5 +47,6 @@ int semaphore_down(int sid);
 int condvar_create();
 int condvar_signal(int cid);
 int condvar_wait(int cid, int mid);
+int enable_deadlock_detect(int enabled);
 
 #endif // __UNISTD_H__

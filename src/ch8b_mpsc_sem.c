@@ -51,8 +51,7 @@ int main()
 {
 	assert((sem_mutex_id = semaphore_create(1)) >= 0);
 	assert((sem_empty_id = semaphore_create(buffer_size)) >= 0);
-	assert((sem_existed_id = semaphore_create(1)) >= 0);
-	semaphore_down(sem_existed_id);
+	assert((sem_existed_id = semaphore_create(0)) >= 0);
 	for (int i = 0; i < producers; i++) {
 		threads[i] = thread_create(producer, (void *)i);
 		assert(threads[i] > 0);
@@ -61,7 +60,6 @@ int main()
 	for (int i = 0; i <= producers; i++) {
 		waittid(threads[i]);
 	}
-	semaphore_up(sem_existed_id);
 	puts("mpsc_sem passed!");
 	return 0;
 }

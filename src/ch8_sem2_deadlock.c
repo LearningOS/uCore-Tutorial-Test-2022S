@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/*
+理想结果：没有检测出死锁，子进程均 exit(0)
+*/
+
 // sem 0: used to sync child thread with main
 // sem 1-3: representing some kind of resource
 
@@ -15,16 +19,16 @@ int semaphore_barrier_id;
 
 void try_sem_down(int id, int sem_id)
 {
-	if (semaphore_down(sem_id) == -1) {
+	if (semaphore_down(sem_id) == -0xdead) {
 		assert_eq(semaphore_up(alloc[id]), 0);
 		assert_eq(semaphore_up(semaphore_barrier_id), 0);
 		exit(-1);
 	}
 }
 
-void deadlock_test(long _tid)
+void deadlock_test(long _id)
 {
-	int id = _tid - 1;
+	int id = _id;
 	assert_eq(semaphore_down(alloc[id]), 0);
 	assert_eq(semaphore_down(semaphore_barrier_id), 0);
 	int sem_id = request[id];
@@ -32,13 +36,14 @@ void deadlock_test(long _tid)
 		try_sem_down(id, sem_id);
 		assert_eq(semaphore_up(sem_id), 0);
 	}
-	assert_eq(semaphore_down(semaphore_barrier_id), 0);
+	assert_eq(semaphore_up(semaphore_barrier_id), 0);
 	assert_eq(semaphore_up(alloc[id]), 0);
 	exit(0);
 }
 
 int main()
 {
+	enable_deadlock_detect(1);
 	assert((semaphore_barrier_id = semaphore_create(THREAD_N)) == 0);
 	for (int i = 0; i < THREAD_N; i++) {
 		semaphore_down(semaphore_barrier_id);
@@ -51,13 +56,15 @@ int main()
 		threads[i] = thread_create(deadlock_test, (void *)i);
 		assert(threads[i] == i + 1);
 	}
-	sleep(1000);
+	sleep(500);
 	for (int i = 0; i < THREAD_N; i++) {
 		semaphore_up(semaphore_barrier_id);
 	}
+	int fail = 0;
 	for (int i = 0; i < THREAD_N; i++) {
-		assert(waittid(threads[i]) == 0);
+		fail += waittid(threads[i]) != 0;
 	}
-	puts("deadlock test2 OK!");
+	assert(fail == 0);
+	puts("deadlock test3 OK!");
 	return 0;
 }

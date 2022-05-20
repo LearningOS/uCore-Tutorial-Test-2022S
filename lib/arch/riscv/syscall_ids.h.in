@@ -289,11 +289,10 @@
 #define __NR_waittid 462
 #define __NR_mutex_create 463
 #define __NR_mutex_lock 464
-#define __NR_mutex_try_lock 465
 #define __NR_mutex_unlock 466
 #define __NR_semaphore_create 467
 #define __NR_semaphore_up 468
-#define __NR_semaphore_try_up 469
+#define __NR_enable_deadlock_detect 469
 #define __NR_semaphore_down 470
 #define __NR_condvar_create 471
 #define __NR_condvar_signal 472
