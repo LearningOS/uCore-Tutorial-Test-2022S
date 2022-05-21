@@ -21,6 +21,6 @@ int main()
 	int num_test = sizeof(TESTS) / sizeof(char *);
 	int succ = run_tests(TESTS, num_test);
 	assert_eq(succ, num_test);
-	puts("ch6b Usertests passed!");
+	puts("ch8 Usertests passed!");
 	return 0;
 }
